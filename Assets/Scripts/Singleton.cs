@@ -29,8 +29,8 @@ public class Singleton : MonoBehaviour
     void Update()
     {
         updateReloadButton();
-        updateShuffleMusic();
-        updateShuffleAmbient();
+        //updateShuffleMusic();
+        //updateShuffleAmbient();
     }
 
     void unlockFPS()
@@ -209,14 +209,12 @@ public class Singleton : MonoBehaviour
     
     
     [Header("Game")]
-    public GameObject player;
     public bool controlsEnabled=true;
-    public bool showTutorial=true, cameraFollow=true;
-    public Vector3 playerPos;
+    public bool showTutorial=true;
 
     public void camShake(float time=.2f)
     {
-        GameObject.FindGameObjectWithTag("CamShake").GetComponent<WiggleRotate>().shake(time);
+        GameObject.FindGameObjectWithTag("Cinemachine").GetComponent<CameraCinemachine>().shake(time);
     }
 
     [Header("Scene Manager")]
@@ -346,11 +344,11 @@ public class Singleton : MonoBehaviour
         transitionTo(Random.Range(0,6));
     }
 
-    [Header("SFX")]
-    public AudioClip[] sfxSnowTransition;
-    public AudioClip[] sfxSnowballShoot, sfxSnowballBounce, sfxSnowballBreak, sfxSnowballSpawn, sfxSnowballPickup;
-    public AudioClip[] sfxHitmarker, sfxPropSpawn;
-    public AudioClip[] sfxEnemySpawn, sfxEnemyHit, sfxEnemySwing, sfxEnemyPunch, sfxEnemyWing;
-    public AudioClip[] sfxEnemyVoiceAttack, sfxEnemyVoiceDie, sfxEnemyVoiceHurt, sfxEnemyVoiceIdle;
-    public AudioClip[] sfxUiLose, sfxUiClick;
+    // [Header("SFX")]
+    // public AudioClip[] sfxSnowTransition;
+    // public AudioClip[] sfxSnowballShoot, sfxSnowballBounce, sfxSnowballBreak, sfxSnowballSpawn, sfxSnowballPickup;
+    // public AudioClip[] sfxHitmarker, sfxPropSpawn;
+    // public AudioClip[] sfxEnemySpawn, sfxEnemyHit, sfxEnemySwing, sfxEnemyPunch, sfxEnemyWing;
+    // public AudioClip[] sfxEnemyVoiceAttack, sfxEnemyVoiceDie, sfxEnemyVoiceHurt, sfxEnemyVoiceIdle;
+    // public AudioClip[] sfxUiLose, sfxUiClick;
 }

@@ -5,44 +5,38 @@ using UnityEngine;
 
 public class CameraCinemachine : MonoBehaviour
 {
-    [HideInInspector] public CinemachineVirtualCamera cm;
-    [HideInInspector] public Transform follow;
+    [HideInInspector] public CinemachineFreeLook cm;
     [HideInInspector] public float defaultSize, currentSize;
-    CinemachineBasicMultiChannelPerlin cbmcp;
+    CinemachineBasicMultiChannelPerlin[] cbmcp;
     float defaultAmplitude, defaultFrequency;
     public float shakeAmplitude=2, shakeFrequency=2;
 
     void Awake()
     {
-        cm=GetComponent<CinemachineVirtualCamera>();
-        follow = new GameObject().transform;
-        follow.position = GameObject.FindGameObjectWithTag("Player").transform.position;
-        cm.Follow = follow;
+        cm=GetComponent<CinemachineFreeLook>();
 
-        cbmcp = cm.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-        defaultAmplitude = cbmcp.m_AmplitudeGain;
-        defaultFrequency = cbmcp.m_FrequencyGain;
+        cbmcp = cm.GetComponentsInChildren<CinemachineBasicMultiChannelPerlin>();
+        defaultAmplitude = cbmcp[0].m_AmplitudeGain;
+        defaultFrequency = cbmcp[0].m_FrequencyGain;
 
         defaultSize=currentSize=cm.m_Lens.OrthographicSize;
     }
 
     void FixedUpdate()
     {
-        if(Singleton.instance.cameraFollow) follow.position = Singleton.instance.playerPos;
-
         if(currentSize!=cm.m_Lens.OrthographicSize) currentSize=cm.m_Lens.OrthographicSize;
     }
 
-    int camMoveLt=0;
-    public void moveCam(Vector3 newPos, float time)
-    {
-        cancelMoveCam();
-        camMoveLt = follow.LeanMove(newPos, time).setEaseInOutSine().id;
-    }
-    public void cancelMoveCam()
-    {
-        LeanTween.cancel(camMoveLt);
-    }
+    // int camMoveLt=0;
+    // public void moveCam(Vector3 newPos, float time)
+    // {
+    //     cancelMoveCam();
+    //     camMoveLt = LeanTween.move(follow.gameObject, newPos, time).setEaseInOutSine().id;
+    // }
+    // public void cancelMoveCam()
+    // {
+    //     LeanTween.cancel(camMoveLt);
+    // }
 
     int camSizeLt=0;
     public void changeCamSize(float newCamSize, float time)
@@ -63,15 +57,18 @@ public class CameraCinemachine : MonoBehaviour
 
     public void doShake(bool toggle=true)
     {
-        if(toggle)
+        foreach(CinemachineBasicMultiChannelPerlin _cbmcp in cbmcp)
         {
-            cbmcp.m_AmplitudeGain = shakeAmplitude;
-            cbmcp.m_FrequencyGain = shakeFrequency;
-        }
-        else
-        {
-            cbmcp.m_AmplitudeGain = defaultAmplitude;
-            cbmcp.m_FrequencyGain = defaultFrequency;
+            if(toggle)
+            {
+                _cbmcp.m_AmplitudeGain = shakeAmplitude;
+                _cbmcp.m_FrequencyGain = shakeFrequency;
+            }
+            else
+            {
+                _cbmcp.m_AmplitudeGain = defaultAmplitude;
+                _cbmcp.m_FrequencyGain = defaultFrequency;
+            }
         }
     }
     
