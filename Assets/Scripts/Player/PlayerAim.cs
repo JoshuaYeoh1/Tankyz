@@ -22,14 +22,12 @@ public class PlayerAim : MonoBehaviour
             if(canAim)
             {
                 LeanTween.rotateY(tankHead, Camera.main.transform.eulerAngles.y, turnTime).setEaseOutSine();
-
-                LeanTween.rotateX(tankBarrel, Camera.main.transform.eulerAngles.x-10, turnTime).setEaseOutSine();
+                LeanTween.rotateX(tankBarrel, Camera.main.transform.eulerAngles.x-5, turnTime).setEaseOutSine();
             }
             else
             {
-                LeanTween.rotateY(tankHead, 90, turnTime).setEaseOutSine();
-
-                LeanTween.rotateX(tankBarrel, 0, turnTime).setEaseOutSine();
+                LeanTween.rotateLocal(tankHead, new Vector3(0, 90, 0), turnTime).setEaseOutSine();
+                LeanTween.rotateLocal(tankBarrel, Vector3.zero, turnTime).setEaseOutSine();
             }
         }
     }

@@ -7,7 +7,7 @@ public class PlayerShoot : MonoBehaviour
     public Transform firepoint, barrel;
     public GameObject projectilePrefab;
     bool canShoot=true;
-    public float ammo=10, coolTime=.5f;
+    public float ammo=10, coolTime=.5f, shootForce=200;
 
     void Update()
     {
@@ -24,7 +24,8 @@ public class PlayerShoot : MonoBehaviour
             //ammo--;
             StartCoroutine(cooling());
             Singleton.instance.camShake();
-            //instantiate at firepoint
+            GameObject bullet = Instantiate(projectilePrefab, firepoint.position, Quaternion.identity);
+            bullet.GetComponent<Rigidbody>().AddForce(firepoint.forward*shootForce, ForceMode.Impulse);
         }
     }
 
