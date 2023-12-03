@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class PlayerAnim : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    Animator anim;
+    PlayerMove move;
+
+    void Awake()
     {
-        
+        anim=GetComponent<Animator>();
+        move=transform.root.GetComponent<PlayerMove>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        anim.SetFloat("moveDir", move.dir.z);
+        anim.SetFloat("turnDir", move.dir.y);
     }
-}
+}   

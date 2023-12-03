@@ -5,8 +5,10 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     Rigidbody rb;
-    float moveDir, turnDir;
-    public float moveSpeed=10, turnSpeed=10;
+    [HideInInspector] public Vector3 dir;
+    public float moveSpeed=30, acceleration=5f, deceleration=5f, velPower=1;
+    public float turnSpeed=100;
+    public bool dpadPressed, dpadUp, dpadDown, dpadLeft, dpadRight;
 
     void Awake()
     {
@@ -15,53 +17,74 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-        keyboard();
-        movement();
+        checkDpad();
+
+        if(!dpadPressed) dir = new Vector3(0, Input.GetAxis("Horizontal"), Input.GetAxisRaw("Vertical"));
     }
 
-    void keyboard()
+    public void dpadUpToggle(bool toggle)
     {
-        if(Input.GetKey(KeyCode.W)) moveFront();
-        else if(Input.GetKey(KeyCode.S)) moveBack();
-        else if(Input.GetKeyUp(KeyCode.W) && moveDir>0) moveStop();
-        else if(Input.GetKeyUp(KeyCode.S) && moveDir<0) moveStop();
-
-        if(Input.GetKey(KeyCode.A)) turnLeft();
-        else if(Input.GetKey(KeyCode.D)) turnRight();
-        else if(Input.GetKeyUp(KeyCode.A) && turnDir<0) turnStop();
-        else if(Input.GetKeyUp(KeyCode.D) && turnDir>0) turnStop();
+        dpadUp=dpadPressed=toggle;
+    }
+    public void dpadDownToggle(bool toggle)
+    {
+        dpadDown=dpadPressed=toggle;
+    }
+    public void dpadLeftToggle(bool toggle)
+    {
+        dpadLeft=dpadPressed=toggle;
+    }
+    public void dpadRightToggle(bool toggle)
+    {
+        dpadRight=dpadPressed=toggle;
     }
 
-    public void moveFront()
+    public void checkDpad()
     {
-        moveDir=1;
-    }
-    public void moveBack()
-    {
-        moveDir=-1;
-    }
-    public void moveStop()
-    {
-        moveDir=0;
+        if(dpadUp) dir.z = 1;
+        else if(dpadDown) dir.z = -1;
+        else dir.z = 0;
+
+        if(dpadRight) dir.y = 1;
+        else if(dpadLeft) dir.y = -1;
+        else dir.y = 0;
     }
 
-    public void turnRight()
+    void FixedUpdate()
     {
-        turnDir=1;
-    }
-    public void turnLeft()
-    {
-        turnDir=-1;
-    }
-    public void turnStop()
-    {
-        turnDir=0;
+        turn();
+        driveZ();
+        driveX();
     }
 
-    void movement()
+    void driveZ()
     {
-        rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, moveDir*moveSpeed);
+        float targetSpeed = dir.z*moveSpeed;
 
-        transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y+turnDir*turnSpeed*Time.deltaTime, transform.localEulerAngles.z);
+        float speedDif = targetSpeed - Vector3.Dot(transform.forward, rb.velocity);
+
+        float accelRate = Mathf.Abs(targetSpeed)>0 ? acceleration:deceleration;
+
+        float movement = Mathf.Pow(Mathf.Abs(speedDif)*accelRate, velPower)*Mathf.Sign(speedDif);
+
+        rb.AddForce(transform.forward*movement);
+    }
+
+    void driveX()
+    {
+        float targetSpeed = dir.x*moveSpeed;
+
+        float speedDif = targetSpeed - Vector3.Dot(transform.right, rb.velocity);
+
+        float accelRate = Mathf.Abs(targetSpeed)>0 ? acceleration:deceleration;
+
+        float movement = Mathf.Pow(Mathf.Abs(speedDif)*accelRate, velPower)*Mathf.Sign(speedDif);
+
+        rb.AddForce(transform.right*movement);
+    }
+
+    void turn()
+    {
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y+dir.y*turnSpeed*Time.deltaTime, transform.eulerAngles.z);
     }
 }
