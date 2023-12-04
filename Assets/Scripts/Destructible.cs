@@ -4,19 +4,10 @@ using UnityEngine;
 
 public class Destructible : MonoBehaviour
 {
-    public GameObject destroyedVersion;
+    public GameObject gibbedVersion;
 
-    public void destroy(float time=0)
+    public void spawnGibs()
     {
-        StartCoroutine(destroying(time));
-    }
-
-    IEnumerator destroying(float t)
-    {
-        yield return new WaitForSeconds(t);
-
-        Instantiate(destroyedVersion, transform.position, transform.rotation);
-
-        Destroy(gameObject);
+        if(gibbedVersion) Instantiate(gibbedVersion, transform.position, transform.rotation);
     }
 }

@@ -121,7 +121,7 @@ MonoBehaviour:
   blastForce: 1500
   blastLayerMask:
     serializedVersion: 2
-    m_Bits: 264
+    m_Bits: 1280
 --- !u!114 &7107677512455759517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,6 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyTime: 3
+  animTime: 0.5
 --- !u!114 &9032752527654950262
 MonoBehaviour:
   m_ObjectHideFlags: 0

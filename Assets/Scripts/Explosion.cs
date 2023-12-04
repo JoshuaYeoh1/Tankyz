@@ -5,10 +5,10 @@ using UnityEngine;
 public class Explosion : MonoBehaviour
 {
     public GameObject explosionPrefab;
-    public float vfxScaleMult=5, blastRadius=10, blastForce=700;
+    public float vfxScaleMult=5, blastRadius=10, blastForce=1000;
     public LayerMask blastLayerMask;
 
-    public void explode(Vector3 pos)
+    public void explode(Vector3 pos, float dmg=0)
     {
         Singleton.instance.camShake();
 
@@ -22,9 +22,21 @@ public class Explosion : MonoBehaviour
 
         foreach(Collider other in collidersToDmg)
         {
-            // Rigidbody otherRb = other.GetComponent<Rigidbody>();
+            if(dmg>0)
+            {
+                if(other.gameObject.tag=="Player")
+                {
+                    Player player = other.GetComponent<Player>();
 
-            // if(otherRb) otherRb.AddExplosionForce(blastForce, pos, blastRadius);
+                    if(player) player.hit(dmg);
+                }
+                else if(other.gameObject.tag=="Enemy")
+                {
+                    Enemy enemy = other.GetComponent<Enemy>();
+
+                    if(enemy) enemy.die();
+                }
+            }
         }
 
         Collider[] collidersToPush =  Physics.OverlapSphere(pos, blastRadius*2, blastLayerMask);

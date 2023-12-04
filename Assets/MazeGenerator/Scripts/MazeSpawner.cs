@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+﻿using Unity.AI.Navigation;
+using UnityEngine;
 using UnityEngine.AI;
-using System.Collections;
 
 //<summary>
 //Game object, that creates maze and instantiates it in scene
@@ -31,7 +31,7 @@ public class MazeSpawner : MonoBehaviour
 
 	private BasicMazeGenerator mMazeGenerator = null;
 
-	//public NavMeshSurface surface;
+	public NavMeshSurface surface;
 
 	void Start()
 	{
@@ -97,6 +97,6 @@ public class MazeSpawner : MonoBehaviour
 			}
 		}
 
-		//surface 
+		surface.BuildNavMesh();
 	}
 }

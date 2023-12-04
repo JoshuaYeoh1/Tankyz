@@ -7,6 +7,10 @@ TagManager:
   - Cinemachine
   - CamShake
   - Scene
+  - Coin
+  - Floor
+  - Enemy
+  - EnemySpawner
   layers:
   - Default
   - TransparentFX
@@ -18,7 +22,7 @@ TagManager:
   - PlayerBullet
   - Enemy
   - EnemyBullet
-  - 
+  - Prop
   - 
   - 
   - 

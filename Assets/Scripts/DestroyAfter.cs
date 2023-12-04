@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class DestroyAfter : MonoBehaviour
 {
-    public float destroyTime=.1f;
+    public float destroyTime=.1f, animTime=.5f;
 
     void Start()
     {
-        Destroy(gameObject, destroyTime);
+        LeanTween.scale(gameObject, Vector3.zero, animTime).setDelay(destroyTime).setEaseInOutSine();
+
+        Destroy(gameObject, destroyTime+animTime);
     }
 }
