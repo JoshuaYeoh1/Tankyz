@@ -6,9 +6,12 @@ public class PlayerMove : MonoBehaviour
 {
     Rigidbody rb;
     [HideInInspector] public Vector3 dir;
+
     public float moveSpeed=30, acceleration=5f, deceleration=5f, velPower=1;
     public float turnSpeed=100;
-    public bool dpadPressed, dpadUp, dpadDown, dpadLeft, dpadRight;
+    [HideInInspector] public bool dpadPressed, dpadUp, dpadDown, dpadLeft, dpadRight;
+
+    public TrailParticles trackVFX;
 
     void Awake()
     {

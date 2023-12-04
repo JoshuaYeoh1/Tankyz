@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerShoot : MonoBehaviour
 {
     public Transform firepoint, barrel;
-    public GameObject projectilePrefab;
+    public GameObject projectilePrefab, muzzleflashPrefab;
     bool canShoot=true;
     public float ammo=10, coolTime=.5f, shootForce=200;
 
@@ -23,9 +23,14 @@ public class PlayerShoot : MonoBehaviour
         {
             //ammo--;
             StartCoroutine(cooling());
+
             Singleton.instance.camShake();
-            GameObject bullet = Instantiate(projectilePrefab, firepoint.position, Quaternion.identity);
+
+            GameObject bullet = Instantiate(projectilePrefab, firepoint.position, firepoint.rotation);
             bullet.GetComponent<Rigidbody>().AddForce(firepoint.forward*shootForce, ForceMode.Impulse);
+
+            GameObject muzzle = Instantiate(muzzleflashPrefab, firepoint.position, Quaternion.identity);
+            muzzle.transform.localScale = muzzle.transform.localScale*8;
         }
     }
 
