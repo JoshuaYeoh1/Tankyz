@@ -27,12 +27,15 @@ public class TrailParticles : MonoBehaviour
         {
             trailIsOn=false;
 
-            foreach(GameObject trail in myTrails)
+            if(myTrails.Count>0)
             {
-                trail.GetComponent<ParticleSystem>().Stop();
-            }
+                foreach(GameObject trail in myTrails)
+                {
+                    trail.GetComponent<ParticleSystem>().Stop();
+                }
 
-            myTrails.Clear();
+                myTrails.Clear();
+            }
         }
     }
 

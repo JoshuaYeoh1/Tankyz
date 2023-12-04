@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1027918391701143489}
   - component: {fileID: 6345625853900415911}
   - component: {fileID: 8761907387951342941}
+  - component: {fileID: -1800013470187064854}
   - component: {fileID: 7107677512455759517}
   - component: {fileID: 4582760053841875891}
   - component: {fileID: 9032752527654950262}
@@ -86,9 +87,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 2.54
+  m_Height: 3.2708712
   m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: 0.41956472}
 --- !u!114 &8761907387951342941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,10 +102,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f31034e8d25f0e43a398f5150c8efa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-1800013470187064854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3080594656324278692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40962e1b1b40a2647b24fca86863c7a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   explosionPrefab: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664,
     type: 3}
-  hitboxPrefab: {fileID: 725350148364428801, guid: a346bdcc5f932ea419c85b284f5c9606,
-    type: 3}
+  vfxScaleMult: 5
+  blastRadius: 10
+  blastForce: 1500
+  blastLayerMask:
+    serializedVersion: 2
+    m_Bits: 264
 --- !u!114 &7107677512455759517
 MonoBehaviour:
   m_ObjectHideFlags: 0

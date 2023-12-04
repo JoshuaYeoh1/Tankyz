@@ -8,7 +8,7 @@ public class PlayerAim : MonoBehaviour
     public float turnTime=.2f;
     public bool canAim=true;
 
-    void Awake()
+    void OnEnable()
     {
         StartCoroutine(aiming());
     }
