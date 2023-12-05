@@ -9,7 +9,7 @@ public class PlayerShoot : MonoBehaviour
     public Transform firepoint, barrel;
     public GameObject projectilePrefab, muzzleflashPrefab;
     bool canShoot=true;
-    public float ammo=5, coolTime=1, shootForce=200;
+    public float ammo=5, coolTime=.5f, shootForce=200;
     float coolLevel;
     public Image coolBar;
     public TextMeshProUGUI textAmmo;

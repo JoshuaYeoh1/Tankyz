@@ -25,8 +25,8 @@ public class PlayerMove : MonoBehaviour
 
         if(!dpadPressed) dir = new Vector3(0, Input.GetAxis("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-        if(Mathf.Abs(dir.z)>Mathf.Abs(dir.y)) moveAudio.volume = Mathf.Abs(dir.z);
-        else moveAudio.volume = Mathf.Abs(dir.y);
+        if(Mathf.Abs(dir.z)>Mathf.Abs(dir.y)) moveAudio.volume = Mathf.Abs(dir.z)*.5f;
+        else moveAudio.volume = Mathf.Abs(dir.y)*.5f;
     }
 
     public void dpadUpToggle(bool toggle)
