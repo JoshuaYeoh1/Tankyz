@@ -22,7 +22,8 @@ public class Spawner : MonoBehaviour
                                 new Vector3(transform.position.x+Random.Range(-maxRange,maxRange),
                                             transform.position.y,
                                             transform.position.z+Random.Range(-maxRange,maxRange)),
-                                Quaternion.identity);
+                                Quaternion.identity,
+                                transform);
                 }
             }
         }

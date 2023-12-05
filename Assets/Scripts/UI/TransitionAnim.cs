@@ -11,8 +11,8 @@ public class TransitionAnim : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    public void playSfxSnow()
+    public void playSfxWhoosh()
     {
-        //Singleton.instance.playSFX(Singleton.instance.sfxSnowTransition,transform,false);
+        Singleton.instance.playSFX(Singleton.instance.sfxTransition, transform.position, false);
     }
 }

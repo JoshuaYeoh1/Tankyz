@@ -31,7 +31,8 @@ public class TrailParticles : MonoBehaviour
             {
                 foreach(GameObject trail in myTrails)
                 {
-                    trail.GetComponent<ParticleSystem>().Stop();
+                    ParticleSystem ps = trail.GetComponent<ParticleSystem>();
+                    if(ps) ps.Stop();
                 }
 
                 myTrails.Clear();

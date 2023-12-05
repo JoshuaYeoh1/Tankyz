@@ -49,8 +49,8 @@ Rigidbody:
   m_GameObject: {fileID: 3080594656324278692}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 1
-  m_AngularDrag: 1
+  m_Drag: 0
+  m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -87,9 +87,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 3.2708712
+  m_Height: 2.598472
   m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 0.41956472}
+  m_Center: {x: 0, y: 0, z: 0.0833652}
 --- !u!114 &8761907387951342941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,6 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f31034e8d25f0e43a398f5150c8efa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dmg: 100
 --- !u!114 &-1800013470187064854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,11 +118,11 @@ MonoBehaviour:
   explosionPrefab: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664,
     type: 3}
   vfxScaleMult: 5
-  blastRadius: 10
+  blastRadius: 15
   blastForce: 1500
   blastLayerMask:
     serializedVersion: 2
-    m_Bits: 1280
+    m_Bits: 3328
 --- !u!114 &7107677512455759517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,7 +149,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fae20aa3e059bfa4f8f904f5fed2d3a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyTime: 3
+  destroyTimeMin: 1
+  destroyTimeMax: 2
   animTime: 0.5
 --- !u!114 &9032752527654950262
 MonoBehaviour:

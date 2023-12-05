@@ -9,9 +9,10 @@ public class PlayerMove : MonoBehaviour
 
     public float moveSpeed=30, acceleration=5f, deceleration=5f, velPower=1;
     public float turnSpeed=100;
-    [HideInInspector] public bool dpadPressed, dpadUp, dpadDown, dpadLeft, dpadRight;
+    [HideInInspector] public bool dpadPressed, dpadUp, dpadDown, dpadLeft, dpadRight, canMove=true;
 
     public TrailParticles trackVFX;
+    public AudioSource moveAudio;
 
     void Awake()
     {
@@ -23,6 +24,9 @@ public class PlayerMove : MonoBehaviour
         checkDpad();
 
         if(!dpadPressed) dir = new Vector3(0, Input.GetAxis("Horizontal"), Input.GetAxisRaw("Vertical"));
+
+        if(Mathf.Abs(dir.z)>Mathf.Abs(dir.y)) moveAudio.volume = Mathf.Abs(dir.z);
+        else moveAudio.volume = Mathf.Abs(dir.y);
     }
 
     public void dpadUpToggle(bool toggle)
@@ -55,9 +59,12 @@ public class PlayerMove : MonoBehaviour
 
     void FixedUpdate()
     {
-        turn();
-        driveZ();
-        driveX();
+        if(canMove)
+        {
+            turn();
+            driveZ();
+            driveX();
+        }
     }
 
     void driveZ()
@@ -89,5 +96,18 @@ public class PlayerMove : MonoBehaviour
     void turn()
     {
         transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y+dir.y*turnSpeed*Time.deltaTime, transform.eulerAngles.z);
+    }
+
+    public void stopMove(float time=.5f)
+    {
+        if(stopRt!=null) StopCoroutine(stopRt);
+        stopRt=StartCoroutine(stoppingMove(time));
+    }
+    Coroutine stopRt;
+    IEnumerator stoppingMove(float s)
+    {
+        canMove=false;
+        yield return new WaitForSeconds(s);
+        canMove=true;
     }
 }

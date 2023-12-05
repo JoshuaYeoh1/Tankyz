@@ -6,7 +6,11 @@ public class Enemy : MonoBehaviour
 {
     Explosion explosion;
     Destructible destructible;
+    public SkinRandomizer skin;
+    public GameObject[] gibSkins;
+
     public float dmg=10;
+    public Transform explodePos;
 
     void Awake()
     {
@@ -18,18 +22,25 @@ public class Enemy : MonoBehaviour
     {
         if(other.gameObject.tag=="Player")
         {
-            explosion.explode(transform.position, dmg);
+            explode(dmg);
         }
     }
 
     public void die()
     {
+        explode(0);
+    }
+
+    void explode(float dmg=0)
+    {
+        destructible.gibbedVersion = gibSkins[skin.skin];
         destructible.spawnGibs();
-        explosion.explode(transform.position, 0);
+        explosion.explode(explodePos.position, dmg);
     }
 
     void OnDestroy()
     {
-        GameObject.FindGameObjectWithTag("Scene").GetComponent<EnemySpawner>().enemyList.Remove(gameObject);
+        EnemySpawner spawner = GameObject.FindGameObjectWithTag("Scene").GetComponent<EnemySpawner>();
+        if(spawner) spawner.enemyList.Remove(gameObject);
     }
 }

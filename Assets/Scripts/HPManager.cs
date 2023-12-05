@@ -5,7 +5,7 @@ using UnityEngine;
 public class HPManager : MonoBehaviour
 {
     public bool regen;
-    public float hp, hpMax, regenHp=1, regenTime=1;
+    public float hp=100, hpMax=100, regenHp=.2f, regenTime=.1f;
     public GameObject hpBarFill;
     public InOutAnim hpBar;
     bool canShow=true, canHide;

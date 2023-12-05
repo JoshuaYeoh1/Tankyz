@@ -11,6 +11,7 @@ TagManager:
   - Floor
   - Enemy
   - EnemySpawner
+  - Ammo
   layers:
   - Default
   - TransparentFX
@@ -23,8 +24,8 @@ TagManager:
   - Enemy
   - EnemyBullet
   - Prop
-  - 
-  - 
+  - Gibs
+  - Trigger
   - 
   - 
   - 

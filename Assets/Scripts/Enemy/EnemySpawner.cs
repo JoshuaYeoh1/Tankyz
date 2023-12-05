@@ -8,9 +8,9 @@ public class EnemySpawner : MonoBehaviour
     public List<GameObject> enemyList = new List<GameObject>();
     public GameObject[] enemySpawners;
 
-    public int maxEnemies=10;
+    public int maxEnemies=20;
     public GameObject enemyPrefab;
-    public float spawnTimeMin=1, spawnTimeMax=10, spawnRangeMin=100;
+    public float spawnTimeMin=1, spawnTimeMax=3, spawnRangeMin=100;
 
     void OnEnable()
     {
@@ -36,7 +36,7 @@ public class EnemySpawner : MonoBehaviour
                 {
                     GameObject chosenSpawner = enemySpawners[Random.Range(0, enemySpawners.Length)];
 
-                    if(Vector3.Distance(chosenSpawner.transform.position, player.transform.position)>spawnRangeMin)
+                    if(player && Vector3.Distance(chosenSpawner.transform.position, player.transform.position)>spawnRangeMin)
                     {
                         GameObject enemy = Instantiate(enemyPrefab, chosenSpawner.transform.position, Quaternion.identity);
 

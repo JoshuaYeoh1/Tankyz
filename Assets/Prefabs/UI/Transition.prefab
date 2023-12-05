@@ -34,12 +34,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1042802110068610054}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0.44543457, y: 0}
+  m_SizeDelta: {x: 0, y: 7.2906494}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2335323708703107757
 MonoBehaviour:
@@ -61,7 +60,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f29734ec506e44b4ab96527c395855cd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6de447fffdc05154a96eead61c45a266, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -126,9 +125,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fa984bb0955938478184c47dd260691, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sfxWhoosh: []
-  sfxSplash: []
-  sfxSpray: []
 --- !u!1 &6714589761286437682
 GameObject:
   m_ObjectHideFlags: 0
@@ -163,7 +159,6 @@ RectTransform:
   m_Children:
   - {fileID: 7799904009682447167}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -187,7 +182,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 32767
   m_TargetDisplay: 0

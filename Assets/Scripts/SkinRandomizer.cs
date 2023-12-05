@@ -6,10 +6,12 @@ public class SkinRandomizer : MonoBehaviour
 {
     public List<GameObject> skinList = new List<GameObject>();
     [HideInInspector] public GameObject chosenSkin;
+    public int skin;
 
     void Awake()
     {
-        chosenSkin = skinList[Random.Range(0,skinList.Count)];
+        skin = Random.Range(0,skinList.Count);
+        chosenSkin = skinList[skin];
 
         for(int i=skinList.Count-1; i>=0; i--)
         {

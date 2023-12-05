@@ -12,6 +12,8 @@ public class Explosion : MonoBehaviour
     {
         Singleton.instance.camShake();
 
+        Singleton.instance.playSFX(Singleton.instance.sfxExplode, pos, false);
+
         if(explosionPrefab)
         {
             GameObject explo = Instantiate(explosionPrefab, pos, Quaternion.identity);
@@ -24,29 +26,28 @@ public class Explosion : MonoBehaviour
         {
             if(dmg>0)
             {
-                if(other.gameObject.tag=="Player")
+                if(other.attachedRigidbody.gameObject.tag=="Player")
                 {
-                    Player player = other.GetComponent<Player>();
+                    Player player = other.attachedRigidbody.GetComponent<Player>();
 
                     if(player) player.hit(dmg);
                 }
-                else if(other.gameObject.tag=="Enemy")
+                else if(other.attachedRigidbody.gameObject.tag=="Enemy")
                 {
-                    Enemy enemy = other.GetComponent<Enemy>();
+                    Enemy enemy = other.attachedRigidbody.GetComponent<Enemy>();
 
                     if(enemy) enemy.die();
                 }
             }
         }
 
-        Collider[] collidersToPush =  Physics.OverlapSphere(pos, blastRadius*2, blastLayerMask);
+        Collider[] collidersToPush =  Physics.OverlapSphere(pos, blastRadius*1.5f, blastLayerMask);
 
         foreach(Collider other in collidersToPush)
         {
-            Rigidbody otherRb = other.GetComponent<Rigidbody>();
-            if(!otherRb) otherRb = other.transform.root.GetComponent<Rigidbody>();
+            Rigidbody otherRb = other.attachedRigidbody.GetComponent<Rigidbody>();
 
-            if(otherRb) otherRb.AddExplosionForce(blastForce, pos, blastRadius*2);
+            if(otherRb) otherRb.AddExplosionForce(blastForce, pos, blastRadius*1.5f);
         }
 
         Destroy(gameObject);

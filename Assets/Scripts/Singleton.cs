@@ -22,15 +22,14 @@ public class Singleton : MonoBehaviour
 
         Invoke("unlockFPS",.1f);
         LoadVolume();
-        //awakeAudio();
-        //awakeTransition();
+        awakeTransition();
     }
 
     void Update()
     {
         updateReloadButton();
-        //updateShuffleMusic();
-        //updateShuffleAmbient();
+        updateShuffleMusic();
+        updateShuffleAmbient();
     }
 
     void unlockFPS()
@@ -44,12 +43,6 @@ public class Singleton : MonoBehaviour
     public AudioSource musicSource, ambSource;
     public AudioClip[] mus, amb;
     //Coroutine randAmbRt;
-
-    void awakeAudio()
-    {
-        changeMusic(.1f);
-        playAmbient();
-    }    
 
     public void changeMusic(float changeFadeTime=2)
     {
@@ -157,9 +150,9 @@ public class Singleton : MonoBehaviour
     //     }
     // }
 
-    public void playSFX(AudioClip[] clip, Transform spawnTransform, bool dynamics=true, bool randPitch=true, float volume=1, bool randPan=false)
+    public void playSFX(AudioClip[] clip, Vector3 pos, bool dynamics=true, bool randPitch=true, float volume=1, bool randPan=false)
     {   
-        AudioSource source = Instantiate(SFXObject, spawnTransform.position, Quaternion.identity);
+        AudioSource source = Instantiate(SFXObject, pos, Quaternion.identity);
         //source.transform.parent = transform;
         
         source.clip = clip[Random.Range(0,clip.Length)];
@@ -264,7 +257,7 @@ public class Singleton : MonoBehaviour
             yield return new WaitForSecondsRealtime(.1f);
 
             // fadeAudio(musicSource, true, transitionAnimator.GetCurrentAnimatorStateInfo(0).length, 0);
-            // fadeAudio(ambSource, true, transitionAnimator.GetCurrentAnimatorStateInfo(0).length, 0);
+            fadeAudio(ambSource, true, transitionAnimator.GetCurrentAnimatorStateInfo(0).length, 0);
 
             yield return new WaitForSecondsRealtime(transitionAnimator.GetCurrentAnimatorStateInfo(0).length);
 
@@ -344,9 +337,9 @@ public class Singleton : MonoBehaviour
         transitionTo(Random.Range(0,6));
     }
 
-    // [Header("SFX")]
-    // public AudioClip[] sfxSnowTransition;
-    // public AudioClip[] sfxSnowballShoot, sfxSnowballBounce, sfxSnowballBreak, sfxSnowballSpawn, sfxSnowballPickup;
+    [Header("SFX")]
+    public AudioClip[] sfxTransition;
+    public AudioClip[] sfxExplode, sfxPlayerShoot, sfxAmmoPickup, sfxSubwoofer, sfxEnemyWalk;
     // public AudioClip[] sfxHitmarker, sfxPropSpawn;
     // public AudioClip[] sfxEnemySpawn, sfxEnemyHit, sfxEnemySwing, sfxEnemyPunch, sfxEnemyWing;
     // public AudioClip[] sfxEnemyVoiceAttack, sfxEnemyVoiceDie, sfxEnemyVoiceHurt, sfxEnemyVoiceIdle;
