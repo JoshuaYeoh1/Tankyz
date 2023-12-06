@@ -5,36 +5,21 @@ using UnityEngine;
 public class PlayerAim : MonoBehaviour
 {
     public GameObject tankHead, tankBarrel;
-    public float turnTime=.2f;
+    
     public bool canAim=true;
+    public float aimSpeed=250;
 
-    void OnEnable()
+    void Update()
     {
-        StartCoroutine(aiming());
-    }
-
-    IEnumerator aiming()
-    {
-        while(true)
+        if(canAim)
         {
-            yield return new WaitForSeconds(turnTime);
+            Quaternion tankHeadAimedY = Quaternion.Euler(tankHead.transform.eulerAngles.x, Camera.main.transform.eulerAngles.y, tankHead.transform.eulerAngles.z);
+            
+            tankHead.transform.rotation = Quaternion.RotateTowards(tankHead.transform.rotation, tankHeadAimedY, Time.deltaTime*aimSpeed);
 
-            if(canAim)
-            {
-                if(tankHead.transform.eulerAngles.y!=Camera.main.transform.eulerAngles.y)
-                LeanTween.rotateY(tankHead, Camera.main.transform.eulerAngles.y, turnTime).setEaseOutSine();
-                
-                if(tankBarrel.transform.eulerAngles.x!=Camera.main.transform.eulerAngles.x)
-                LeanTween.rotateX(tankBarrel, Camera.main.transform.eulerAngles.x-5, turnTime).setEaseOutSine();
-            }
-            else
-            {
-                if(tankHead.transform.eulerAngles!=new Vector3(0, 90, 0))
-                LeanTween.rotateLocal(tankHead, new Vector3(0, 90, 0), turnTime).setEaseOutSine();
+            Quaternion tankBarrelAimedX = Quaternion.Euler(Camera.main.transform.eulerAngles.x-3.5f, tankBarrel.transform.eulerAngles.y, tankBarrel.transform.eulerAngles.z);
 
-                if(tankBarrel.transform.eulerAngles!=Vector3.zero)
-                LeanTween.rotateLocal(tankBarrel, Vector3.zero, turnTime).setEaseOutSine();
-            }
+            tankBarrel.transform.rotation = Quaternion.RotateTowards(tankBarrel.transform.rotation, tankBarrelAimedX, Time.deltaTime*aimSpeed);
         }
     }
 }

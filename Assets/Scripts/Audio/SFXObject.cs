@@ -6,7 +6,7 @@ public class SFXObject : MonoBehaviour
 {
     AudioSource source;
     //float camRadiusX;
-    [HideInInspector] public bool randPitch=true, dynamics=true;
+    public bool randPitch=true, dynamics=true;
 
     void Awake()
     {

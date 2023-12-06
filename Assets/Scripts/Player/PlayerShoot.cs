@@ -8,11 +8,14 @@ public class PlayerShoot : MonoBehaviour
 {
     public Transform firepoint, barrel;
     public GameObject projectilePrefab, muzzleflashPrefab;
+
     bool canShoot=true;
-    public float ammo=5, coolTime=.5f, shootForce=200;
+    public int ammo=5;
+    public float coolTime=.5f, shootForce=300;
     float coolLevel;
     public Image coolBar;
     public TextMeshProUGUI textAmmo;
+    public HUDHider hudHider;
 
     void OnEnable()
     {
@@ -23,7 +26,9 @@ public class PlayerShoot : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space)) shoot();    
 
-        textAmmo.text = ammo.ToString();    
+        textAmmo.text = ammo.ToString();
+
+        hudHider.checkedValue = ammo;
     }
 
     public void shoot()

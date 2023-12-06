@@ -47,9 +47,19 @@ public class Explosion : MonoBehaviour
         {
             Rigidbody otherRb = other.attachedRigidbody.GetComponent<Rigidbody>();
 
-            if(otherRb) otherRb.AddExplosionForce(blastForce, pos, blastRadius*1.5f);
+            if(otherRb)
+            {
+                otherRb.velocity=Vector3.zero;
+                otherRb.AddExplosionForce(blastForce, pos, blastRadius*1.5f);
+            }
         }
 
         Destroy(gameObject);
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = new Color(1, .5f, 0, .5f);
+        Gizmos.DrawWireSphere(transform.position, blastRadius);
     }
 }
